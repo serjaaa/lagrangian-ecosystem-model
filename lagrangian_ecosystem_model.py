@@ -232,14 +232,11 @@ while t <= fin_t:
     X[1] = X[1] + vel(t,X,S_h,S_v)[1] * dt
     
     ## width equation
-    W = W + ( kappa_h(t,X,S_h)/W + (delta(t,X,S_h,S_v)/2 - gamma(t,X,S_h))*W ) * dt
+    W = W + ( kappa_h(t,X,S_h)/W - gamma(t,X,S_h)*W ) * dt
 
     ## lenght equation
-    L = L + ( kappa_h(t,X,S_h)/L + (delta(t,X,S_h) + gamma(t,X,S_h))*L ) * dt
+    L = L + ( kappa_h(t,X,S_h)/L + gamma(t,X,S_h)*L ) * dt
 
-    ## thickness equation
-    T = T + ( kappa_v(t,X,S_h)/T - delta(t,X,S_h)*T ) * dt
-    
     ## horizontal volume derivative
     V_dev_h = ((4 * np.pi)/3) * kappa_h(t,X,S_h) * T * ( (W*W + L*L) / (W*L) )
     V_dev = V_dev_h
